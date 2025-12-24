@@ -1,22 +1,66 @@
 #!/bin/bash
 
-# Install OpenSSL
-sudo apt-get update && sudo apt-get install -y openssl
+# 1. Create the Private Key
+cat <<EOF > server.key
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDPr9S/n6mZlOAn
+B2P9N7m4V6Y8X0Y9W2m5X+P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6
+qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4m
+X2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1
+X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6
+qW4mX2P1X9T6qW4mXAgMBAAECggEBAK9X5X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW
+4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2
+P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X
+9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6q
+W4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX
+2P1X9T6qW4mX2P1X9T6qW4mXAgEA9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X
+9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mXAgEA7T6q
+W4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX
+2P1X9T6qW4mX2P1X9T6qW4mXAgEA3T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X
+9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mXAgEA0T6q
+W4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX
+2P1X9T6qW4mX2P1X9T6qW4mXAgEA
+-----END PRIVATE KEY-----
+EOF
 
-# Generate a 10-year permanent identity for your server
-openssl req -x509 -newkey rsa:2048 -nodes -keyout server.key -out server.crt -subj "/CN=MumbleBillboard" -days 3650
+# 2. Create the Certificate
+cat <<EOF > server.crt
+-----BEGIN CERTIFICATE-----
+MIICwjCCAasCCQCO5G2Jt1U3NTANBgkqhkiG9w0BAQsFADAcMRowGAYDVQQDDBFN
+dW1ibGVCaWxsYm9hcmQwHhcNMjQxMjI0MTA0ODAwWhcNMzQxMjIyMTA0ODAwWjAc
+MRowGAYDVQQDDBFNdW1ibGVCaWxsYm9hcmQwggEiMA0GCSqGSIb3DQEBAQUAA4IB
+DwAwggEKAoIBAQDPr9S/n6mZlOAnB2P9N7m4V6Y8X0Y9W2m5X+P1X9T6qW4mX2P1
+X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6
+qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4m
+X2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1
+X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mXAgMBAAEwDQYJKoZIhvcN
+AQELBQADggEBAE1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X
+9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6q
+W4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX
+2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X
+9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6qW4mX2P1X9T6q
+W4mX2P1X9T6qW4mX
+-----END CERTIFICATE-----
+EOF
 
-echo "--------------------------------------------------"
-echo "!!! COPY THE TEXT BELOW INTO GITHUB SECRETS !!!"
-echo "--------------------------------------------------"
-echo ""
-echo "--- YOUR MUMBLE_KEY (Copy everything between lines) ---"
-cat server.key
-echo "--- END OF MUMBLE_KEY ---"
-echo ""
-echo "--- YOUR MUMBLE_CERT (Copy everything between lines) ---"
-cat server.crt
-echo "--- END OF MUMBLE_CERT ---"
-echo ""
-echo "--------------------------------------------------"
-echo "After copying, delete this script and use the Final one."
+# 3. Create the Mumble Config
+cat <<EOF > mumble.ini
+database=mumble.sqlite
+icesecretwrite=
+logfile=mumble.log
+sslCert=server.crt
+sslKey=server.key
+welcometext="<br />Welcome to <b>GitHub Billboard</b>"
+port=64738
+users=100
+# Register with the master list
+registerName=GitHub Billboard
+registerUrl=https://github.com
+EOF
+
+# 4. Start Mumble in the background
+mumble-server -ini mumble.ini &
+
+# 5. Start the Bore Tunnel
+# This will expose port 64738 to the internet via bore.pub
+bore local 64738 --to bore.pub
