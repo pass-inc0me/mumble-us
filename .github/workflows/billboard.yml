@@ -1,4 +1,4 @@
-name: MumbleBillboard
+name: BillboardNode
 on:
   schedule:
     - cron: '0 */6 * * *'
@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: PersistentNode
+      - name: Start
         run: |
           chmod +x entrypoint.sh
           timeout 21000s ./entrypoint.sh || true
